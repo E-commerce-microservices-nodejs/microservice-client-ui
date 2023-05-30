@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-ui-deployment
+  namespace: m-ecommerce
+spec:
+  selector:
+    matchLabels:
+      app: client-ui-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: client-ui-deployment
+    spec:
+      containers:
+        - name: client-ui-deployment
+          image: asmaeel/client-ui-microservice:1.1
+          ports:
+            - containerPort: 3000
+              name: client-ui-port
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: "http://gateway-service:5005/api"
+            
