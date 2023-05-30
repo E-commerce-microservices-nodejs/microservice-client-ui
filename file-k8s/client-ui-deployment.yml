@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: client-ui-deployment
-          image: asmaeel/client-ui-microservice:1.1
+          image: asmaeel/client-ui-microservice:1.2
           ports:
             - containerPort: 3000
               name: client-ui-port
