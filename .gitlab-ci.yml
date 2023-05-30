@@ -28,7 +28,7 @@ gitops-k8s-deploy:
   image: bitnami/git:latest
   stage: deploy-k8s
   before_script:
-    - git config --global user.client-ui "elazrakasmae@gmail.com"
+    - git config --global user.email "elazrakasmae@gmail.com"
     - git config --global user.name "Asmae20"
   script:
     - git clone https://gitlab.com/Asmae20/client-ui-microservice.git
