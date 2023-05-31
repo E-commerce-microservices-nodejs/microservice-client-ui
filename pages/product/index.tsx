@@ -57,7 +57,7 @@ export const getServerSideProps: GetServerSideProps<
     `${
       process.env.NODE_ENV === "production"
         ? process.env.NEXT_PUBLIC_API_URL
-        : "http://localhost:5005/api"
+        : "http://gateway-service:5005/api"
     }/products`
   );
   const products: Product[] = await response.json();
