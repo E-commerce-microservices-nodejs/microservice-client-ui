@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: client-ui-deployment
-          image: asmaeel/client-ui-microservice:1.5
+          image: asmaeel/client-ui-microservice:1.6
           resources:
             limits:
               cpu: 500m
