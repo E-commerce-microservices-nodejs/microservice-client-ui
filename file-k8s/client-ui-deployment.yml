@@ -29,9 +29,4 @@ spec:
           env:
             - name: NEXT_PUBLIC_API_URL
               value: "http://gateway-service:5005/api"
-          # Autoscaling configuration
-      autoscaling:
-        enabled: true
-        minReplicas: 1
-        maxReplicas: 10
-        targetCPUUtilizationPercentage: 50  
+         
