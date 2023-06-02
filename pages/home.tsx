@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import { Container, Typography } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
-import HomeImage from "../public/images/home.jpg";
+import HomeImage from "../public/images/home2.png";
 
 const Home: NextPage = () => (
   <Container sx={{ pt: 9 }}>
@@ -11,7 +11,7 @@ const Home: NextPage = () => (
 
     <Container component="main">
       <Typography variant="h5" gutterBottom>
-        Explore our wide range of products!
+        Explore our wide range of products version 2!
       </Typography>
       <Image src={HomeImage} />
 
