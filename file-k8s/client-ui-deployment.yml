@@ -16,10 +16,22 @@ spec:
       containers:
         - name: client-ui-deployment
           image: asmaeel/client-ui-microservice:1.5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 200m
+              memory: 128Mi
           ports:
             - containerPort: 3000
               name: client-ui-port
           env:
             - name: NEXT_PUBLIC_API_URL
               value: "http://gateway-service:5005/api"
-            
+          # Autoscaling configuration
+      autoscaling:
+        enabled: true
+        minReplicas: 1
+        maxReplicas: 10
+        targetCPUUtilizationPercentage: 50  
