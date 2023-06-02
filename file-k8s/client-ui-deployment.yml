@@ -1,20 +1,54 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-ui-deployment
+  name: client-ui-v1
   namespace: m-ecommerce
 spec:
   selector:
     matchLabels:
-      app: client-ui-deployment
+      app: client-ui
   replicas: 1
   template:
     metadata:
       labels:
-        app: client-ui-deployment
+        app: client-ui
+        version: v1
     spec:
       containers:
-        - name: client-ui-deployment
+        - name: client-ui
+          image: asmaeel/client-ui-microservice:1.5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 200m
+              memory: 128Mi
+          ports:
+            - containerPort: 3000
+              name: client-ui-port
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: "http://gateway-service:5005/api"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-ui-v2
+  namespace: m-ecommerce
+spec:
+  selector:
+    matchLabels:
+      app: client-ui
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: client-ui
+        version: v2
+    spec:
+      containers:
+        - name: client-ui
           image: asmaeel/client-ui-microservice:1.6
           resources:
             limits:
@@ -29,4 +63,4 @@ spec:
           env:
             - name: NEXT_PUBLIC_API_URL
               value: "http://gateway-service:5005/api"
-         
+

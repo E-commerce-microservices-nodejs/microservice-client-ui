@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: client-ui-service
+  name: client-ui
   namespace: m-ecommerce
   labels:
-    app: client-ui-service
+    app: client-ui
 spec:
   selector:
-    app: client-ui-deployment
+    app: client-ui
   ports:
     - protocol: TCP
       port: 3000
