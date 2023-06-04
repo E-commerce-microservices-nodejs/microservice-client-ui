@@ -1,14 +1,12 @@
 export default {
   primary: {
-    // main: '#083f8f',
-    main: "#222935",
-    // 'rgba(0,0,0,0.9)',
-    success: "green",
+    main: '#222935',
+    success: 'green',
   },
   secondary: {
-    main: "#fff",
+    main: '#fff',
   },
 };
 export const ButtonColors = {
-  buyProductButton: "#ffbf00",
+  buyProductButton: '#ffbf00',
 };
