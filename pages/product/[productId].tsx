@@ -1,31 +1,24 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/anchor-has-content */
 
-import { Box, Container, Divider, Grid, Typography } from "@mui/material";
-import {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  GetStaticPaths,
-  GetStaticProps,
-  GetStaticPropsContext,
-} from "next";
-import { FC, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import Image from "next/image";
-import { StarBorderOutlined } from "@mui/icons-material";
-import { useRouter } from "next/router";
-import { Product } from "../../common/types/@appTypes";
-import ProductZoomer from "../../common/components/productPage/components/ProductZoomer";
-import QuantityInput from "../../common/components/productPage/components/QuantityInput";
-import Reviews from "../../common/components/productPage/components/reviews";
-import SuggestionsSilder from "../../common/components/productPage/components/slider/SuggestionsSlider";
+import { Box, Container, Divider, Grid, Typography } from '@mui/material';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { FC, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import Image from 'next/image';
+import { StarBorderOutlined } from '@mui/icons-material';
+import { Product } from '../../common/types/@appTypes';
+import ProductZoomer from '../../common/components/productPage/components/ProductZoomer';
+import QuantityInput from '../../common/components/productPage/components/QuantityInput';
+import Reviews from '../../common/components/productPage/components/reviews';
+import SuggestionsSilder from '../../common/components/productPage/components/slider/SuggestionsSlider';
 
 interface ProductPageProps {
   product: Product;
 }
 const ProductDetails: FC<ProductPageProps> = ({ product }) => {
   const [currentMainImage, setCurrentMainImage] = useState(
-    product.image ? product.image[0] : ""
+    product.image ? product.image[0] : ''
   );
 
   const dispatch = useDispatch()<any>;
@@ -45,7 +38,7 @@ const ProductDetails: FC<ProductPageProps> = ({ product }) => {
     <Container
       maxWidth="xl"
       sx={{
-        bgcolor: "secondary.main",
+        bgcolor: 'secondary.main',
         pt: 1,
         boxShadow: 3,
         mt: { md: 1, xs: -4 },
@@ -54,16 +47,16 @@ const ProductDetails: FC<ProductPageProps> = ({ product }) => {
     >
       <Grid container>
         <Grid xs={12} md={0.4} item>
-          <Grid direction={{ md: "column", xs: "row" }} container>
+          <Grid direction={{ md: 'column', xs: 'row' }} container>
             {product.image
               ? product.image.map((imageSrc: string) => (
                   <Grid
                     key={imageSrc}
                     sx={{
-                      border: "2px solid #000",
+                      border: '2px solid #000',
                       mb: { md: 1 },
                       ml: { xs: 1, md: 0 },
-                      cursor: "pointer",
+                      cursor: 'pointer',
                     }}
                     xs={1.5}
                     md={12}
@@ -79,7 +72,7 @@ const ProductDetails: FC<ProductPageProps> = ({ product }) => {
                     />
                   </Grid>
                 ))
-              : ""}
+              : ''}
           </Grid>
         </Grid>
         {/* 2----------------------- */}
@@ -95,9 +88,9 @@ const ProductDetails: FC<ProductPageProps> = ({ product }) => {
         >
           <Box
             sx={{
-              backgroundColor: "red",
-              width: "fit-content",
-              blockSize: "fit-content",
+              backgroundColor: 'red',
+              width: 'fit-content',
+              blockSize: 'fit-content',
             }}
           >
             <ProductZoomer productImage={currentMainImage} />
@@ -112,10 +105,10 @@ const ProductDetails: FC<ProductPageProps> = ({ product }) => {
           >
             {product.title}
           </Typography>
-          <Box className="prod-price" sx={{ display: "flex", gap: 4, pt: 3 }}>
+          <Box className="prod-price" sx={{ display: 'flex', gap: 4, pt: 3 }}>
             <Typography component="h1"> {product.price} DH</Typography>
-            <Typography component="h1" sx={{ textDecoration: "line-through" }}>
-              {increasedPrice(product.price ? product.price.toString() : "0")}{" "}
+            <Typography component="h1" sx={{ textDecoration: 'line-through' }}>
+              {increasedPrice(product.price ? product.price.toString() : '0')}{' '}
               DH
             </Typography>
             <Typography component="h1">( 25% OFF )</Typography>
@@ -127,19 +120,19 @@ const ProductDetails: FC<ProductPageProps> = ({ product }) => {
           >
             inclusive of all taxes
           </Typography>
-          <Typography variant="h6" color={isProductInStock ? "green" : "red"}>
+          <Typography variant="h6" color={isProductInStock ? 'green' : 'red'}>
             {isProductInStock
               ? `${product.quantity} units availble`
-              : "out of stock"}
+              : 'out of stock'}
           </Typography>
           <Box
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               p: 0.2,
               borderRadius: 20,
-              backgroundColor: "#fe0",
+              backgroundColor: '#fe0',
               width: 70,
             }}
           >
@@ -148,9 +141,9 @@ const ProductDetails: FC<ProductPageProps> = ({ product }) => {
           {/* ---------- */}
           <Box
             sx={{
-              display: "flex",
+              display: 'flex',
               mt: { xs: -3, md: -10 },
-              justifyContent: "center",
+              justifyContent: 'center',
               ml: 16,
             }}
           >
@@ -175,12 +168,12 @@ const ProductDetails: FC<ProductPageProps> = ({ product }) => {
 
       {/* reviews */}
       <Divider sx={{ mb: 1, mt: 1 }} />
-      <Grid container sx={{ mt: 2, display: "flex", gap: 18 }}>
+      <Grid container sx={{ mt: 2, display: 'flex', gap: 18 }}>
         <Grid item md={12}>
           <Typography variant="h5" sx={{ mb: 2 }}>
             Reviews
           </Typography>
-          <Reviews reviews={product.review ? product.review : [""]} />
+          <Reviews reviews={product.review ? product.review : ['']} />
         </Grid>
         <a href="#reviews" />
       </Grid>
@@ -202,15 +195,15 @@ export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (
     // Fetch products from an API or database
     const response = await fetch(
       `${
-        process.env.NODE_ENV === "production"
+        process.env.NODE_ENV === 'production'
           ? process.env.NEXT_PUBLIC_API_URL
-          : "http://localhost:5005/api"
+          : 'http://localhost:5005/api'
       }/products/${productId}`
     );
 
     // Handle non-successful HTTP response
     if (!response.ok) {
-      throw new Error("Failed to fetch products");
+      throw new Error('Failed to fetch products');
     }
 
     const product: Product = await response.json();
@@ -221,7 +214,7 @@ export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (
       },
     };
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.error('Error fetching products:', error);
     return {
       props: {
         product: {} as Product, // Return an empty array or any default value for products
