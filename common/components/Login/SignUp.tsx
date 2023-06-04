@@ -51,11 +51,11 @@ const SignUp: FC<LoginProps> = ({ onClose }) => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ color: "#fff" }}>
+    <Container maxWidth="sm" sx={{}}>
       <DialogTitle>Sign Up !</DialogTitle>
 
       <TextField
-        sx={{ color: "#fff" }}
+        sx={{}}
         label="Email"
         type="email"
         value={email}
@@ -65,7 +65,7 @@ const SignUp: FC<LoginProps> = ({ onClose }) => {
         margin="normal"
       />
       <TextField
-        sx={{ color: "#fff" }}
+        sx={{}}
         label="Password"
         type="password"
         value={password}
@@ -75,7 +75,7 @@ const SignUp: FC<LoginProps> = ({ onClose }) => {
         margin="normal"
       />
       <TextField
-        sx={{ color: "#fff" }}
+        sx={{}}
         label="Credit"
         type="text"
         value={credit}
@@ -86,7 +86,7 @@ const SignUp: FC<LoginProps> = ({ onClose }) => {
         margin="normal"
       />
       <TextField
-        sx={{ color: "#fff" }}
+        sx={{}}
         label="Full Name"
         type="text"
         value={fullName}
@@ -107,7 +107,7 @@ const SignUp: FC<LoginProps> = ({ onClose }) => {
           onClick={(e) => handleSubmit(e)}
           variant="contained"
           color="primary"
-          sx={{ color: "#fff" }}
+          sx={{}}
         >
           sign up
         </Button>

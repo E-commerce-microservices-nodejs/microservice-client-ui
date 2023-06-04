@@ -51,9 +51,11 @@ const QuantityInput: FC<PropTypes> = ({ product }) => {
   return (
     <Paper
       sx={{
-        p: 2,
+        p: 3,
+        pb: 13,
+
         width: 300,
-        height: 190,
+        height: 250,
         border: "1px solid #ddd",
         zIndex: 0,
       }}
@@ -64,10 +66,10 @@ const QuantityInput: FC<PropTypes> = ({ product }) => {
         {" "}
         {(product.price as unknown as number) * quantity}
         {" DH"}
-        <Divider />
       </Typography>
+      <Divider sx={{ mb: 2 }} />
       <ButtonGroup
-        sx={{ display: "block", mb: 1, ml: 3 }}
+        sx={{ display: "block", mb: 1, ml: 1 }}
         disabled={!isProductInStock}
       >
         <Button variant="contained" onClick={handleDecrement}>
@@ -104,6 +106,7 @@ const QuantityInput: FC<PropTypes> = ({ product }) => {
             backgroundColor: ButtonColors.buyProductButton,
             pl: 3,
             pr: 3,
+
             fontWeight: "bold",
             fontSize: { xs: 13, md: "auto" },
             "&:hover": { color: "#000", backgroundColor: "#f80" },

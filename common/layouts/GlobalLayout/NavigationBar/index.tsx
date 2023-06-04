@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -16,11 +15,14 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoginOutlined, ShoppingCart } from "@mui/icons-material";
 import Link from "next/link";
+import Cookies from "js-cookie";
+import { FC, MouseEvent, useEffect, useState } from "react";
 import LoginForm from "../../../components/Login";
 import { RootState } from "../../../../store/types";
+import { UserType } from "../../../types/@appTypes";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,12 +64,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavigationBar() {
+const NavigationBar: FC = () => {
   const user = useSelector((state: RootState) => state.user.authenticatedUser);
-  const [loginOpen, setLoginOpen] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+    useState<null | HTMLElement>(null);
 
   const shoppingCart = useSelector(
     (state: RootState) => state.products.shoppingCart
@@ -79,7 +82,7 @@ export default function NavigationBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleProfileMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -92,7 +95,7 @@ export default function NavigationBar() {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleMobileMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
@@ -271,4 +274,6 @@ export default function NavigationBar() {
       {renderMenu}
     </Box>
   );
-}
+};
+
+export default NavigationBar;

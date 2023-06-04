@@ -27,7 +27,7 @@ export interface TokenState {
 }
 
 export interface SetTokenAction {
-  type: "SET_TOKEN";
+  type: "SET_TOKEN" | "CLEAR_TOKEN";
   payload: string;
 }
 
@@ -52,7 +52,11 @@ export interface ProductsState {
 }
 
 export interface SetProductsAction {
-  type: "SET_PRODUCTS" | "ADD_TO_SHOPPING_CART" | "REMOVE_FROM_SHOPPING_CART";
+  type:
+    | "SET_PRODUCTS"
+    | "SET_SHOPPING_CART"
+    | "ADD_TO_SHOPPING_CART"
+    | "REMOVE_FROM_SHOPPING_CART";
   payload: any;
 }
 

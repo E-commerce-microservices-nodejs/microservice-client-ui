@@ -1,8 +1,9 @@
 // store/tokenReducer.ts
+import Cookies from "js-cookie";
 import { TokenActionTypes, TokenState } from "./types";
 
 const initialState: TokenState = {
-  token: "",
+  token: Cookies.get("token") || "",
 };
 
 const tokenReducer = (
@@ -12,9 +13,18 @@ const tokenReducer = (
 ): TokenState => {
   switch (action.type) {
     case "SET_TOKEN":
+      Cookies.set("token", action.payload);
+
       return {
         ...state,
         token: action.payload,
+      };
+    case "CLEAR_TOKEN":
+      // Remove the token from the cookie
+      Cookies.remove("token");
+      return {
+        ...state,
+        token: "",
       };
     default:
       return state;

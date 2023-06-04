@@ -27,6 +27,12 @@ const productReducer = (
         shoppingCart: [...state.shoppingCart, ...newItems],
       };
     }
+    case "SET_SHOPPING_CART": {
+      return {
+        ...state,
+        shoppingCart: action.payload,
+      };
+    }
     case "REMOVE_FROM_SHOPPING_CART": {
       const removedItem = state.shoppingCart.filter(
         (prod) => prod._id === action.payload._id

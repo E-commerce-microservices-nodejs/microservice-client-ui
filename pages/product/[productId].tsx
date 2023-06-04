@@ -2,20 +2,28 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 
 import { Box, Container, Divider, Grid, Typography } from "@mui/material";
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
-import { useEffect, useState } from "react";
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+} from "next";
+import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { StarBorderOutlined } from "@mui/icons-material";
+import { useRouter } from "next/router";
 import { Product } from "../../common/types/@appTypes";
 import ProductZoomer from "../../common/components/productPage/components/ProductZoomer";
 import QuantityInput from "../../common/components/productPage/components/QuantityInput";
 import Reviews from "../../common/components/productPage/components/reviews";
 import SuggestionsSilder from "../../common/components/productPage/components/slider/SuggestionsSlider";
 
-type Props = { product: Product };
-
-const ProductDetails = ({ product }: Props) => {
+interface ProductPageProps {
+  product: Product;
+}
+const ProductDetails: FC<ProductPageProps> = ({ product }) => {
   const [currentMainImage, setCurrentMainImage] = useState(
     product.image ? product.image[0] : ""
   );
@@ -186,44 +194,80 @@ const ProductDetails = ({ product }: Props) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (
+  context: GetServerSidePropsContext
+) => {
+  const { productId } = context.params as { productId: string };
   try {
-    // Call an external API endpoint to get products
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
-    if (!res.ok) {
+    // Fetch products from an API or database
+    const response = await fetch(
+      `${
+        process.env.NODE_ENV === "production"
+          ? process.env.NEXT_PUBLIC_API_URL
+          : "http://localhost:5005/api"
+      }/products/${productId}`
+    );
+
+    // Handle non-successful HTTP response
+    if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
 
-    const products: Product[] = await res.json();
+    const product: Product = await response.json();
 
-    // Get the paths we want to pre-render based on products
-    const paths = products.map((product) => ({
-      params: { productId: product._id },
-    }));
-
-    return { paths, fallback: false };
+    return {
+      props: {
+        product,
+      },
+    };
   } catch (error) {
-    // Handle the error gracefully, e.g., log the error or return a fallback value
-    console.error("Error in getStaticPaths:", error);
-    return { paths: [], fallback: false };
+    console.error("Error fetching products:", error);
+    return {
+      props: {
+        product: {} as Product, // Return an empty array or any default value for products
+      },
+    };
   }
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-}: GetStaticPropsContext) => {
-  const productId = params?.productId;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`
-  );
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   try {
+//     // Call an external API endpoint to get products
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+//     if (!res.ok) {
+//       throw new Error("Failed to fetch products");
+//     }
 
-  const product: Product = await res.json();
+//     const products: Product[] = await res.json();
 
-  return {
-    props: {
-      product,
-    },
-  };
-};
+//     // Get the paths we want to pre-render based on products
+//     const paths = products.map((product) => ({
+//       params: { productId: product._id },
+//     }));
+
+//     return { paths, fallback: false };
+//   } catch (error) {
+//     // Handle the error gracefully, e.g., log the error or return a fallback value
+//     console.error("Error in getStaticPaths:", error);
+//     return { paths: [], fallback: false };
+//   }
+// };
+
+// export const getStaticProps: GetStaticProps = async ({
+//   params,
+// }: GetStaticPropsContext) => {
+//   const productId = params?.productId;
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`
+//   );
+
+//   const product: Product = await res.json();
+
+//   return {
+//     props: {
+//       product,
+//     },
+//   };
+// };
 
 export default ProductDetails;

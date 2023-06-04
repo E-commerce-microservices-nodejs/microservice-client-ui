@@ -1,7 +1,8 @@
 # Base image
 FROM node:18-alpine AS builder
 ENV NODE_ENV=development
-ENV NEXT_PUBLIC_API_URL=http://gateway:5005/api
+# ENV NEXT_PUBLIC_API_URL=http://gateway-service:5005/api
+ENV NEXT_PUBLIC_API_URL=http://cloud.inpt.ma:30005/api
 # Set working directory
 WORKDIR /app
 # Copy package.json and package-lock.json
@@ -22,7 +23,9 @@ RUN npm run build
 # Final image
 FROM node:18-alpine
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_API_URL=http://gateway:5005/api
+# ENV NEXT_PUBLIC_API_URL=http://gateway-service:5005/api
+
+ENV NEXT_PUBLIC_API_URL=http://cloud.inpt.ma::30005/api
 # Set working directory
 WORKDIR /app
 # update npm 

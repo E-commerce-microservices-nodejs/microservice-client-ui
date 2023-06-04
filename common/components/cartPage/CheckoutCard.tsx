@@ -10,6 +10,7 @@ import {
 import NextLink from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { RootState } from "../../../store/types";
 
 const theme = createTheme({
@@ -26,6 +27,8 @@ const CheckoutCard = () => {
     (state: RootState) => state.user.authenticatedUser
   );
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const total = shoppingCart.reduce(
     (a, b) =>
       a + (b.price as unknown as number) * (b.quantity as unknown as number),
@@ -50,6 +53,11 @@ const CheckoutCard = () => {
         });
     }
   };
+  const goToPayment = () => {
+    makeOrder();
+    router.push("/payment");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Paper sx={{ border: "1px solid #ddd", p: 4 }}>
@@ -70,13 +78,13 @@ const CheckoutCard = () => {
 
         <Button
           disabled={total === 0}
-          onClick={makeOrder}
+          onClick={goToPayment}
           fullWidth
           variant="contained"
         >
-          <NextLink href="/payment">
-            <a> Order Products </a>
-          </NextLink>
+          {/* <NextLink href="/payment"> */}
+          <a> Order Products </a>
+          {/* </NextLink> */}
         </Button>
       </Paper>
     </ThemeProvider>
