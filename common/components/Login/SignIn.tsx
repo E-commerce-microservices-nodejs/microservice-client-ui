@@ -50,11 +50,11 @@ const SignIn: FC<LoginProps> = ({ onClose }) => {
   };
 
   return (
-    <Box sx={{ color: "#fff" }}>
+    <Box sx={{}}>
       <DialogTitle>Sign In !</DialogTitle>
       <DialogContent>
         <TextField
-          sx={{ color: "#fff" }}
+          sx={{}}
           autoFocus
           margin="dense"
           label="Username"
@@ -64,7 +64,7 @@ const SignIn: FC<LoginProps> = ({ onClose }) => {
           fullWidth
         />
         <TextField
-          sx={{ color: "#fff" }}
+          sx={{}}
           margin="dense"
           label="Password"
           type="password"
@@ -78,7 +78,7 @@ const SignIn: FC<LoginProps> = ({ onClose }) => {
           </Typography>
         ) : null}
       </DialogContent>
-      <DialogActions sx={{ color: "#fff" }}>
+      <DialogActions sx={{}}>
         <Button onClick={handleCancel}>Cancel</Button>
         <Button onClick={handleLogin} variant="contained" color="primary">
           Login

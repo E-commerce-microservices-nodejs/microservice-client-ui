@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { UserType } from "../types/@appTypes";
-import { UserAction } from "../../store/types";
+import { SetTokenAction, UserAction } from "../../store/types";
 
 export const loginSuccess = (user: UserType): UserAction => ({
   type: "SET_USER",
@@ -14,7 +14,7 @@ export const loginError = (error: string): UserAction => ({
 
 export const loginUser =
   (email: string, password: string) =>
-  async (dispatch: Dispatch<UserAction>): Promise<void> => {
+  async (dispatch: Dispatch<UserAction | SetTokenAction>): Promise<void> => {
     try {
       // Perform login API request
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
@@ -30,6 +30,7 @@ export const loginUser =
         // Dispatch the login success action
         console.log(user);
         dispatch(loginSuccess(user));
+        dispatch({ type: "SET_TOKEN", payload: user.token as string });
       } else {
         // Handle login error
         const error = await response.text();
@@ -44,7 +45,7 @@ export const loginUser =
   };
 export const registerUser =
   (email: string, password: string, fullname: string, credit: number) =>
-  async (dispatch: Dispatch<UserAction>): Promise<void> => {
+  async (dispatch: Dispatch<UserAction | SetTokenAction>): Promise<void> => {
     try {
       // Perform login API request
       const response = await fetch(
@@ -66,6 +67,7 @@ export const registerUser =
         // Dispatch the login success action
         console.log(user);
         dispatch(loginSuccess(user));
+        dispatch({ type: "SET_TOKEN", payload: user.token as string });
       } else {
         // Handle login error
         const error = await response.text();

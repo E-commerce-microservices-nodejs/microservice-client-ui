@@ -1,21 +1,22 @@
 import type { NextPage } from "next";
 // import Head from "next/head";
-import { Container, Typography } from "@mui/material";
-import Link from "next/link";
+import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
-import HomeImage from "../public/images/home2.png";
+import HomeImage from "../public/images/home.jpg";
+import ExploreproductsButton from "../common/components/homePage/ExploreProductsButton";
 
 const Home: NextPage = () => (
   <Container sx={{ pt: 9 }}>
     <header />
 
-    <Container component="main">
+    <Container sx={{ position: "relative" }} component="main">
       <Typography variant="h5" gutterBottom>
-        Explore our wide range of products version 2!
+        Explore our wide range of products!
       </Typography>
       <Image src={HomeImage} />
-
-      <Link href="/product"> explore our products</Link>
+      <Box sx={{ position: "absolute", left: "12%", top: "51%" }}>
+        <ExploreproductsButton />
+      </Box>
     </Container>
   </Container>
 );
