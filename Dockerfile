@@ -25,7 +25,7 @@ FROM node:18-alpine
 ENV NODE_ENV=production
 # ENV NEXT_PUBLIC_API_URL=http://gateway-service:5005/api
 
-ENV NEXT_PUBLIC_API_URL=http://cloud.inpt.ma::30005/api
+ENV NEXT_PUBLIC_API_URL=http://m-ecommerce.com/api
 # Set working directory
 WORKDIR /app
 # update npm 

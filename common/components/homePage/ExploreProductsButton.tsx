@@ -4,7 +4,6 @@ import { Fab } from '@mui/material';
 import NavigationIcon from '@mui/icons-material/Navigation';
 
 export default function ExploreproductsButton() {
-  console.log(3);
   return (
     <Link href="/product">
       <Fab variant="extended" color="primary">

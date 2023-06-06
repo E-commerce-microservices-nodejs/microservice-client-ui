@@ -1,12 +1,13 @@
-import { GetServerSideProps } from "next";
-import { FC, useEffect } from "react";
-import { Container, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/router";
-import { ErrorOutline } from "@mui/icons-material";
-import ProductList from "../../common/components/CartList";
-import { Product } from "../../common/types/@appTypes";
-import { RootState } from "../../store/types";
+/* eslint-disable no-console */
+import { GetServerSideProps } from 'next';
+import { FC, useEffect } from 'react';
+import { Container, Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { ErrorOutline } from '@mui/icons-material';
+import ProductList from '../../common/components/CartList';
+import { Product } from '../../common/types/@appTypes';
+import { RootState } from '../../store/types';
 
 interface ProductPageProps {
   products: Product[];
@@ -18,7 +19,7 @@ const products: FC<ProductPageProps> = ({ products }) => {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: "SET_PRODUCTS", payload: products });
+    dispatch({ type: 'SET_PRODUCTS', payload: products });
   }, []);
 
   const router = useRouter();
@@ -40,7 +41,7 @@ const products: FC<ProductPageProps> = ({ products }) => {
           <ErrorOutline />
           <Typography>
             make sure you are connected to api gateway
-          </Typography>{" "}
+          </Typography>{' '}
         </>
       )}
     </Container>
@@ -56,15 +57,15 @@ export const getServerSideProps: GetServerSideProps<
     // Fetch products from an API or database
     const response = await fetch(
       `${
-        process.env.NODE_ENV === "production"
+        process.env.NODE_ENV === 'production'
           ? process.env.NEXT_PUBLIC_API_URL
-          : "http://localhost:5005/api"
+          : 'http://localhost:5005/api'
       }/products`
     );
 
     // Handle non-successful HTTP response
     if (!response.ok) {
-      throw new Error("Failed to fetch products");
+      throw new Error('Failed to fetch products');
     }
 
     const products: Product[] = await response.json();
@@ -75,7 +76,7 @@ export const getServerSideProps: GetServerSideProps<
       },
     };
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.error('Error fetching products:', error);
     return {
       props: {
         products: [], // Return an empty array or any default value for products
