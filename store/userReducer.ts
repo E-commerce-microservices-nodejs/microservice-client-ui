@@ -1,5 +1,9 @@
 // reducers/userReducer.ts
 
+<<<<<<< HEAD
+=======
+import Cookies from "js-cookie";
+>>>>>>> origin/main
 import { UserState } from "./types";
 
 const initialState: UserState = {
@@ -11,11 +15,20 @@ const initialState: UserState = {
 const userReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case "SET_USER":
+<<<<<<< HEAD
+=======
+      Cookies.set("user", JSON.stringify(action.payload));
+>>>>>>> origin/main
       return {
         ...state,
         authenticatedUser: action.payload,
       };
     case "LOGOUT_USER":
+<<<<<<< HEAD
+=======
+      Cookies.remove("user");
+
+>>>>>>> origin/main
       return {
         ...state,
         authenticatedUser: null,

@@ -27,7 +27,11 @@ export interface TokenState {
 }
 
 export interface SetTokenAction {
+<<<<<<< HEAD
   type: "SET_TOKEN";
+=======
+  type: "SET_TOKEN" | "CLEAR_TOKEN";
+>>>>>>> origin/main
   payload: string;
 }
 
@@ -52,7 +56,15 @@ export interface ProductsState {
 }
 
 export interface SetProductsAction {
+<<<<<<< HEAD
   type: "SET_PRODUCTS" | "ADD_TO_SHOPPING_CART" | "REMOVE_FROM_SHOPPING_CART";
+=======
+  type:
+    | "SET_PRODUCTS"
+    | "SET_SHOPPING_CART"
+    | "ADD_TO_SHOPPING_CART"
+    | "REMOVE_FROM_SHOPPING_CART";
+>>>>>>> origin/main
   payload: any;
 }
 
@@ -60,6 +72,10 @@ export interface RootState {
   user: UserState;
   token: TokenState;
   products: ProductsState;
+<<<<<<< HEAD
+=======
+  order: any;
+>>>>>>> origin/main
 }
 
 export type ProductActionTypes = SetProductsAction;

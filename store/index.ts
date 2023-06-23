@@ -1,9 +1,17 @@
 // store/index.ts
+<<<<<<< HEAD
 import { createStore, applyMiddleware } from "redux";
 // import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 import { RootState } from "./types";
+=======
+import { createStore, applyMiddleware } from 'redux';
+// import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
+import { RootState } from './types';
+>>>>>>> origin/main
 
 const initialState = {} as RootState;
 
